@@ -1,12 +1,12 @@
-#ifndef 	ColorLamp_H
-#define	ColorLamp_H
+#ifndef 	RGBLEDHelper_H
+#define	RGBLEDHelper_H
 
 #include <Arduino.h>
 
-class ColorLamp	
+class RgbLed	
 	{
 public:
-	ColorLamp(int R, int G, int B);
+	RgbLed(int R, int G, int B);
 	
 	bool setRGB(int R, int G, int B);
 	bool fadeRGB(int R, int G, int B, int fadeSpeed);
@@ -17,11 +17,11 @@ public:
 	void setMinLum(byte Rmin, byte Gmin, byte Bmin);
 	void setMaxLum(byte Rmax, byte Gmax, byte Bmax);
 	
-	int* getStatus();
-	int* getPin();
-	int* getTarget();
-	int* getMinLum();
-	int* getMaxLum();
+	int * getStatus();
+	int * getPin();
+	int * getTarget();
+	int * getMinLum();
+	int * getMaxLum();
 
 private:
 	bool _checkColor(int c);

@@ -1,7 +1,11 @@
-#include <ColorLamp.h>
+#include <RGBLEDHelper.h>
 
-// Costruttore dell'oggetto ColorLamp
-ColorLamp::ColorLamp(int Rpin, int Gpin, int Bpin)	{
+/* CONSTRUCTOR
+ 	PARAMS: pin of the anodes.
+	
+	Set the initial status and target to 0, the minimum luminosity to 0 and the max to 255, and the pinmode to Output.
+*/
+RgbLed::RgbLed(int Rpin, int Gpin, int Bpin)	{
 	
 	_pin[0] = Rpin;
 	_pin[1] = Gpin;
@@ -19,36 +23,36 @@ ColorLamp::ColorLamp(int Rpin, int Gpin, int Bpin)	{
 }
 
 // ***
-// FUNZIONI DI MODIFICA _private
+// ACCESSORS OF _private
 // ***
 
-// RETURNS: pointer to private _status
-int* ColorLamp::getStatus()	{
+// RETURNS: array of private _status
+int * RgbLed::getStatus()	{
 	return _status;
 }
 
-// RETURNS: pointer to private _pinout
-int* ColorLamp::getPin()	{
+// RETURNS: array of private _pinout
+int * RgbLed::getPin()	{
 	return _pin;
 }
 
-// RETURNS: pointer to private _target
-int* ColorLamp::getTarget()	{
+// RETURNS: array of private _target
+int * RgbLed::getTarget()	{
 	return _target;
 }
 
-// RETURNS: pointer to private _minLum
-int* ColorLamp::getMinLum()	{
+// RETURNS: array of private _minLum
+int * RgbLed::getMinLum()	{
 	return _minLum;
 }
 
-// RETURNS: pointer to private _maxLum
-int* ColorLamp::getMaxLum()	{
+// RETURNS: array of private _maxLum
+int * RgbLed::getMaxLum()	{
 	return _maxLum;
 }
 
-// Setta il massimo dei valori possibili per il led
-void ColorLamp::setMinLum(byte Rmin, byte Gmin, byte Bmin)	{
+// Set the minimum luminisity of each pin		
+void RgbLed::setMinLum(byte Rmin, byte Gmin, byte Bmin)	{
 	if (_checkColor(Rmin) && _checkColor(Gmin) && _checkColor(Bmin))	{
 		_minLum[0] = Rmin;
 		_minLum[1] = Gmin;
@@ -57,8 +61,8 @@ void ColorLamp::setMinLum(byte Rmin, byte Gmin, byte Bmin)	{
 	else Serial.println("Error - setMinLum");
 }
 
-// Setta il minimo dei valori possibili per il led
-void ColorLamp::setMaxLum(byte Rmax, byte Gmax, byte Bmax)	{
+// Set the maximum luminisity of each pin	
+void RgbLed::setMaxLum(byte Rmax, byte Gmax, byte Bmax)	{
 	if (_checkColor(Rmax) && _checkColor(Gmax) && _checkColor(Bmax))	{
 		_maxLum[0] = Rmax;
 		_maxLum[1] = Gmax;
@@ -70,14 +74,14 @@ void ColorLamp::setMaxLum(byte Rmax, byte Gmax, byte Bmax)	{
 
 
 // ***
-// FUNZIONI DI AZIONE
+// MODIFIERS
 // ***
 
 
-// Setta il colore
-bool ColorLamp::setRGB(int R, int G, int B)	{
-	if (_checkColor(R,0) && _checkColor(G,1) && _checkColor(B,2))	{	//controlla che i valori siano accettabili
-		Serial.println("Eseguo setRGB");
+// Set the color of the LED.
+bool RgbLed::setRGB(int R, int G, int B)	{
+	if (_checkColor(R,0) && _checkColor(G,1) && _checkColor(B,2))	{	//checks if the values are acceptable
+		Serial.println("Running setRGB");
 		
 		_target[0] = R;
 		analogWrite(_pin[0],R);
@@ -95,14 +99,14 @@ bool ColorLamp::setRGB(int R, int G, int B)	{
 	}
 	
 	else {
-		Serial.println("Valori errati RGB");
+		Serial.println("Non-acceptable RGB values");
 		return 0;
 	}
 	
 }
 
-// Sfuma il colore verso il colore input con velocità variabile
-bool ColorLamp::fadeRGB(int R, int G, int B, int fadeSpeed)	{
+// Fade the LED to the input color with variable speed.
+bool RgbLed::fadeRGB(int R, int G, int B, int fadeSpeed)	{
 	if (_checkColor(R,0) && _checkColor(G,1) && _checkColor(B,2))	{
 		
 		_target[0] = R;
@@ -133,31 +137,32 @@ bool ColorLamp::fadeRGB(int R, int G, int B, int fadeSpeed)	{
 	} // end if
 	
 	else	{
-		Serial.println("Valori errati RGB");
+		Serial.println("Non-acceptable RGB values");
 		return 0;
 	} 
 }
 
 // I comandi qui sotto non risentono delle limitazioni di min e max lum.
 
-// Spegne il led
-void ColorLamp::off()	{
+// Turn OFF the LED.
+void RgbLed::off()	{
 	for (int i=0; i<3; i++)	{
 		digitalWrite(_pin[i],LOW);
 		_status[i] = 0;
 	}
 }
 
-// Accende il led
-void ColorLamp::on()	{
+// Turn ON the LED.
+void RgbLed::on()	{
 	for (int i=0; i<3; i++)	{
 		digitalWrite(_pin[i],HIGH);
 		_status[i] = 255;
 	}
 }
 
-// Accende i led marcati con 1 e spegne gli altri
-void ColorLamp::set(bool R, bool G, bool B)	{
+// Turn ON/OFF each LED component.
+// 1 to enable, 0 to disable.
+void RgbLed::set(bool R, bool G, bool B)	{
 	if (R)	{
 		digitalWrite(_pin[0],HIGH);
 		_status[0] = 255;
@@ -189,17 +194,18 @@ void ColorLamp::set(bool R, bool G, bool B)	{
 
 
 // ***
-// FUNZIONI UTILITY
+// UTILITY FUNCTIONS
 // ***
 
 
 // RETURN: true if color is acceptable, false if not
-bool ColorLamp::_checkColor(int c) {
+bool RgbLed::_checkColor(int c) {
 	if (c >= 0 && c <= 255)	return 1;
 	else return 0;
 }
 
-bool ColorLamp::_checkColor(int c, byte led)	{
+// RETURN: true if color is acceptable for the led, false if not
+bool RgbLed::_checkColor(int c, byte led)	{
 	if (c >= _minLum[led] && c <= _maxLum[led])	return 1;
 	else return 0;
 }
