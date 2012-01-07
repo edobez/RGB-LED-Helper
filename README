@@ -1,0 +1,37 @@
+/******************************************************************
+*  RGB LED Helper Arduino Library v1.0
+*
+*		Brought to you by:
+*              Edoardo Bezzeccheri	
+*              www.bezphoto.it
+*
+*  Lib version history
+*	1.0  Created and made Arduino 1.0 compatible!
+*
+*
+*	
+*  
+*This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public *License as published by the Free Software Foundation, either version 3 of the License, or(at your option) any later *version.
+*This program is distributed in the hope that it will be useful,
+*but WITHOUT ANY WARRANTY; without even the implied warranty of
+*MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*GNU General Public License for more details.
+*<http://www.gnu.org/licenses/>
+*
+*This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. 
+*To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/ or
+*send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
+******************************************************************/
+
+
+********************To Install*************************************
+
+To install, unzip and place 'RGBLEDHelper' folder into your 'C:\Users\{user name}\Documents\Arduino\libraries' folder or '{Arduino IDE path}\hardware\libraries" or {Arduino IDE path}\libraries" directory. 
+
+Restart the Arduino IDE, look for the Library under "Sketch" -> "Import Library". You can also try the examples by finding them
+under "File" -> "Examples" -> "EasyTransfer".
+
+All uses of the library are in the example sketchs. 
+
+
+*******************************************************************
