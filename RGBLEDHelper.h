@@ -14,6 +14,7 @@ public:
 	void off();
 	void on();
 	void set(bool R, bool G, bool B);
+	
 	void setMinLum(byte Rmin, byte Gmin, byte Bmin);
 	void setMaxLum(byte Rmax, byte Gmax, byte Bmax);
 	
@@ -34,5 +35,11 @@ private:
 	int _minLum[3];
 	
 };
+
+// class DoubleRgbLed: public RgbLed
+// 	{
+// public:
+// 	DoubleRgbLed(int R1, int G1, int B1,int R2, int G2, int B2);
+// };
 
 #endif
