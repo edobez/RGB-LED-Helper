@@ -1,0 +1,35 @@
+#######################################
+# Syntax Coloring Map For Debounce
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+RgbLed	 KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+setRGB	 	KEYWORD2
+fadeRGB		KEYWORD2
+off	 		KEYWORD2
+on	 		KEYWORD2
+set	 		KEYWORD2
+setMinLum	KEYWORD2
+setMaxLum	KEYWORD2
+getStatus   KEYWORD2
+getPin      KEYWORD2
+getTarget   KEYWORD2
+getMinLum   KEYWORD2
+getMaxLum   KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
