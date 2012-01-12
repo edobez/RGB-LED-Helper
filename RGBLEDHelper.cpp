@@ -207,6 +207,12 @@ bool RgbLed::_checkColor(int c) {
 // RETURN: true if color is acceptable for the led, false if not
 bool RgbLed::_checkColor(int c, byte led)	{
 	if (c >= _minLum[led] && c <= _maxLum[led])	return 1;
-	else return 0;
+	else {
+		Serial.print("Wrong color: ");
+		Serial.print(c);
+		Serial.print(" - Led: ");
+		Serial.println(led);
+		return 0;
+	}
 }
 
